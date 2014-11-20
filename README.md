@@ -1,4 +1,4 @@
 geomo
 =====
 
-Pygeoip wrappers for J-Mo
+Pygeoip wrappers for top recent editors to Wikimedia projects
