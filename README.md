@@ -1,4 +1,4 @@
 geomo
 =====
 
-Pygeoip wrappers for top recent editors to Wikimedia projects
+Get the top recent contributors to Wikimedia projects in a specified geography.
