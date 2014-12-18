@@ -15,11 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import argparse
 import csv
 import geo
-import MySQLdb
 import geo_config
+import MySQLdb
 import sys
 
 def project_editors_primary_ips(cursor, query):
@@ -58,28 +57,10 @@ if __name__ == '__main__':
 	wiki = sys.argv[1] #the project you want to get data about
 	top_n = int(sys.argv[2]) #the number of people per geo
 	output_path = sys.argv[3] #the name of the file you want to output
-# 	project_db = geo_config.s6_dbname
-	countries = geo_config.countries
+	countries = dict((c,[]) for c in sys.argv[4].split(",")) #the list of two-letter country codes, separated by commas with no spaces
 	conn = MySQLdb.connect(host = geo_config.s6_host, db = wiki, read_default_file = geo_config.s6_defaultcnf, use_unicode=1, charset="utf8")	
 	cursor = conn.cursor()
-	query = """select user_name, user_id, total_edits, primary_ip 
-	  from (
-		select sum(edits) as total_edits, user_id, user_name, primary_ip from (
-		  select count(cuc_id) as edits, cuc_user as user_id, cuc_user_text AS user_name, cuc_ip as primary_ip 
-	  from %s.cu_changes 
-		where cuc_user != 0 
-		and cuc_type = 0 
-		  and cuc_user NOT IN (
-			SELECT ug_user FROM %s.user_groups WHERE ug_group = 'bot'
-			)
-		 group by cuc_user, cuc_ip 
-		 order by edits desc
-		 ) as tmp 
-	   group by user_id order by total_edits desc
-		 ) as tmp2 
-	   where total_edits >= 15 
-	   order by total_edits desc; """ % (wiki, wiki,)
-	
+	query = geo_config.rc_query % (wiki, wiki,)	
 	editors_ips = project_editors_primary_ips(cursor, query)
 	for editor in editors_ips:
 		country_code = geo.geo_country([unicode(editor[3], "UTF-8")])
