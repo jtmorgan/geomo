@@ -57,7 +57,7 @@ if __name__ == '__main__':
 	wiki = sys.argv[1] #the project you want to get data about
 	top_n = int(sys.argv[2]) #the number of people per geo
 	output_path = sys.argv[3] #the name of the file you want to output
-	countries = dict((c,[]) for c in sys.argv[4].split(",")) #the list of two-letter country codes, separated by commas with no spaces
+	countries = dict((c,[]) for c in sys.argv[4].split(",")) #the list of two-letter country codes (case sensitive, uppercase), separated by commas with no spaces
 	conn = MySQLdb.connect(host = geo_config.s6_host, db = wiki, read_default_file = geo_config.s6_defaultcnf, use_unicode=1, charset="utf8")	
 	cursor = conn.cursor()
 	query = geo_config.rc_query % (wiki, wiki,)	

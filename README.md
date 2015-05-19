@@ -1,4 +1,14 @@
-geomo
+Top editors per project and country
 =====
 
 Get the top recent contributors to Wikimedia projects in a specified geography.
+
+The output of this script is a CSV file that lists the top N editors to project X from country (or countries) Y. The script uses ISO 3166 2 country codes (lookup file provided in the repo). Edit counts provided are for the past three months. The minimum threshold for inclusion is at least 15 edits over 3 months. Basically, if an editor doesn't meet Wikimedia's global minimum criteria for "active editor", they will not be included in the output. If there are only 5 editors who made at least 15 edits, then you only get top 5, even if you specified more. 
+
+The script only gathers edits by registered editors. For each editor, the script uses the IP address they edited from most during the past three months to determine their (probable) geolocation. Edits from the same IP performed by anonymous editors are not counted. Registered bot accounts are not included, but it's always possible someone is running an unregistered bot. 
+
+Running the script.
+
+The script accepts the target wiki, the number of results per country, the output filename, and the list of country codes as command line arguments. So for example, to get the top 10 editors to English Wikipedia from the US and UK, you would run:
+
+python top_recent_contributors.py enwiki 10 path/to/us_uk_top_editors.csv "US,UK"
