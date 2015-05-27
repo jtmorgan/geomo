@@ -1,5 +1,4 @@
-Top editors per project and country
-=====
+== Top editors per project and country ==
 
 Get the top recent contributors to Wikimedia projects in a specified geography.
 
