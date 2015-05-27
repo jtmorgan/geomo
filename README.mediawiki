@@ -7,8 +7,8 @@ The output of this script is a CSV file that lists the top N editors to project 
 
 The script only gathers edits by registered editors. For each editor, the script uses the IP address they edited from most during the past three months to determine their (probable) geolocation. Edits from the same IP performed by anonymous editors are not counted. Registered bot accounts are not included, but it's always possible someone is running an unregistered bot. 
 
-Running the script.
+=== Running the script ===
 
-The script accepts the target wiki, the number of results per country, the output filename, and the list of country codes as command line arguments. So for example, to get the top 10 editors to English Wikipedia from the US and UK, you would run:
+''top_recent_contributors.py'' accepts the following command line arguments (in order): target wiki, the number of results per country, the output filename, and the list of country codes separated by commas. So for example, to get the top 10 editors to English Wikipedia from the US and UK, you would run:
 
-python top_recent_contributors.py enwiki 10 path/to/us_uk_top_editors.csv "US,UK"
+<code>python top_recent_contributors.py enwiki 10 path/to/us_uk_top_editors.csv "US,UK"</code>
