@@ -9,7 +9,7 @@ s6_user = 'user2'
 defaultcnf = '/home/user1/.my.cnf'
 s6_defaultcnf = '/home/user2/.my.cnf'
 
-#basic query. dbname is passed in by top_recent_contributors.py
+#this is the basic query. dbname is passed in by top_recent_contributors.py
 rc_query = """select user_name, user_id, total_edits, primary_ip 
 	  from (
 		select sum(edits) as total_edits, user_id, user_name, primary_ip from (
